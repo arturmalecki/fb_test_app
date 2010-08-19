@@ -10,4 +10,24 @@
 Welcome to
   your first app.
 </p>
-<%= debug @facebook_user %>
+<% if(params[:error_notice]) %>
+  <fb:error message="<%= params[:error_notice] %>" />
+<% end %>
+
+<% if(params[:success_notice]) %>
+  <fb:success message="<%= params[:success_notice] %>" />
+<% end %>
+<% form_for(@comment) do |f| %>
+  <%= f.label(:comment, "Komentarz:") %>
+  <br/>
+  <%= f.text_area(:comment, :size => "20x5") %>
+  <br/>
+  <fb:submit>Dodaj</fb:submit>
+<% end %>
+
+
+<fb:wall>
+  <% @friends_comments.each do |fc| %>
+    <fb:wallpost uid="<%= fc.user.facebook_uid %>"><%= fc.created_at %> -- <%= fc.comment %></fb:wallpost>
+  <% end %>
+</fb:wall>
