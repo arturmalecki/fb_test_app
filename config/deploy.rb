@@ -11,6 +11,7 @@ role :db,  "83.19.4.130", :primary => true
 
 task :after_update_code do
   run "ln -nfs #{deploy_to}/#{shared_dir}/config/database.yml #{release_path}/config/database.yml"
+  run "ln -nfs #{deploy_to}/#{shared_dir}/config/facebooker.yml #{release_path}/config/facebooker.yml"
 end
 
 namespace :deploy do
