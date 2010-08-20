@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
     if(params[:action] != "fan_page")
       ensure_application_is_installed_by_facebook_user
 	    ensure_authenticated_to_facebook
-	    get_user
+	    get_user if(facebook_session)
     end
   end
 
